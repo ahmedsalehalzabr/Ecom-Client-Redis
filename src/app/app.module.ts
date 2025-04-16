@@ -13,6 +13,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterLink } from '@angular/router';
 import { HomeModule } from './home/home.module';
 import { loaderInterceptor } from './core/Interceptor/loader.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,14 @@ import { loaderInterceptor } from './core/Interceptor/loader.interceptor';
     HomeModule,
     RouterLink,
     ShopModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ToastrModule.forRoot({
+      closeButton:true,
+      positionClass:'toast-top-right',
+      countDuplicates:true,
+      timeOut:1500,
+      progressBar:true,
+    })
   ],
   providers: [
     provideClientHydration(),

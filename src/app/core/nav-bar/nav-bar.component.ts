@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from 'express';
 import { Observable } from 'rxjs';
+import { BasketService } from '../../basket/basket.service';
+import { IBasket } from '../../shared/Models/Basket';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,25 +14,29 @@ export class NavBarComponent implements OnInit {
   visibale: boolean = false;
 
   constructor(
-    // private basketService: BasketService,
-    // private _service: CoreService,
+    private basketService: BasketService,
+    //private _service: CoreService,
     // private router:Router
   ) {}
-  // count: Observable<IBasket>;
+  count: Observable<IBasket>;
   ngOnInit(): void {
-    // const basketId = localStorage.getItem('basketId');
+    const basketId = localStorage.getItem('basketId');
 
-    // this.basketService.GetBasket(basketId).subscribe({
-    //   next: (value) => {
-    //     console.log(value);
-    //     this.count = this.basketService.basket$;
-    //   },
-    //   error(err) {
-    //     console.log(err);
-    //   },
-    // });
+    this.basketService.GetBasket(basketId).subscribe({
+      next: (value) => {
+        console.log(value);
+        this.count = this.basketService.basket$;
+      },
+      error(err) {
+        console.log(err);
+      },
+    });
     // this._service.getUserName().subscribe();
     // this._service.userName$.subscribe(value=>{
     //   this.userName=value;
     // })
-  }}
+  }
+  ToggleDropDown(){
+    this.visibale=!this.visibale
+  }
+}

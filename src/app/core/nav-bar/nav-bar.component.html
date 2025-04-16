@@ -29,13 +29,13 @@
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/basket">
-            <!-- <i matBadge="{{(count |async).basketItems.length}}"--> 
-             <i matBadgeColor="warn" class="material-icons">shopping_cart</i> 
+            <i class="material-icons">shopping_cart</i>
+            <span style="margin-left: 4px;">{{ (count | async)?.basketItems?.length || 0 }}</span>
           </a>
         </li>
 
         <li class=" nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" >
+          <a (click)="ToggleDropDown()" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" >
             <i  class="material-icons">account_circle</i>
 
           </a>\

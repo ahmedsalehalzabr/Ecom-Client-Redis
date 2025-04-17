@@ -65,10 +65,10 @@ export class BasketService {
   ): IBasketItem[] {
     const index = basketItems.findIndex((i) => i.id === itemToAdd.id);
     if (index == -1) {
-      itemToAdd.qunatity = quantity;
+      itemToAdd.quantity = quantity;
       basketItems.push(itemToAdd);
     } else {
-      basketItems[index].qunatity += quantity;
+      basketItems[index].quantity += quantity;
     }
     return basketItems;
   }
@@ -94,8 +94,9 @@ export class BasketService {
       name: product.name,
       image: product.photos[0].imageName,
       price: product.newPrice,
-      qunatity: quantity,
+      quantity: quantity,
       category: product.categoryName,
+      description:product.description,
     };
   }
 }

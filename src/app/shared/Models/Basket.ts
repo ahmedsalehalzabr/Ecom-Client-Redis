@@ -10,10 +10,10 @@ export interface IBasketItem {
   id: number;
   name: string;
   image: string;
-  qunatity: number;
-  price: number;
+  quantity: number;
+  price?: number;
   category: string;
- // description:string
+  description:string
 }
 export class Basket implements IBasket{
     // PaymentIntentId: string;

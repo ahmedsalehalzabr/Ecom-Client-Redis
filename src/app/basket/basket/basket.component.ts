@@ -13,7 +13,7 @@ export class BasketComponent implements OnInit {
   ngOnInit(): void {
     this._service.basket$.subscribe({
       next:(value)=>{
-        this.basket==value
+        this.basket=value
       },
       error(err) {
         console.log(err);

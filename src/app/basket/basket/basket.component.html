@@ -1,1 +1,30 @@
-<p>basket works!</p>
+@if (basket.id==null)
+{
+    <p class="text-center text-danger">
+        your basket is empty
+    </p>
+}@else {
+    <div class="container pt-4 flex-container">
+        <div class="basket-container">
+            <table class="table table-hover custom-table">
+                <thead>
+                    <tr class="bg-info text-white">
+                        <th>Product</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of basket.basketItems; track $index){
+                        <tr>
+                            <td>
+                                <a routerLink="/shop/product-details/{{item.id}}" class="text-dark text-decoration-none"></a>
+                            </td>t
+                            <td>
+                                <img src="https://localhost:7184/{{item.image}}" alt="" class="product-image img-fluid">
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

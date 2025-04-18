@@ -12,6 +12,9 @@ const routes: Routes = [
   {path:'basket',loadChildren:()=> import('./basket/basket.module')
     .then(m=>m.BasketModule)
   },
+  {path:'checkout',loadChildren:()=> import('./checkout/checkout.module')
+    .then(m=>m.CheckoutModule)
+  },
   {path:'product-details/:id',component:ProductDetailsComponent},
 
   {path: '**',redirectTo:'',pathMatch:'full'}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from '../basket.service';
-import { IBasket } from '../../shared/Models/Basket';
+import { IBasket, IBasketItem } from '../../shared/Models/Basket';
 
 @Component({
   selector: 'app-basket',
@@ -20,5 +20,14 @@ export class BasketComponent implements OnInit {
       }
     });
   }
+  RemoveBasket(item:IBasketItem){
+    this._service.removeItemFormBasket(item)
+  }
+  incrementQuantity(item:IBasketItem){
+    this._service.incrementBasketItemQuantity(item);
+  }
+  DecrementQuantity(item:IBasketItem){
+    this._service.DecrementBasketItemQuantity(item);
+  } 
 
 }

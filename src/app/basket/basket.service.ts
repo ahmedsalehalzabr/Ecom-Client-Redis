@@ -99,5 +99,47 @@ export class BasketService {
       description:product.description,
     };
   }
+  incrementBasketItemQuantity(item: IBasketItem) {
+    const basket = this.GetCurrentValue();
+    const itemIndex = basket.basketItems.findIndex((i) => i.id === item.id);
+    basket.basketItems[itemIndex].quantity++;
+    this.SetBasket(basket);
+  }
+
+  DecrementBasketItemQuantity(item: IBasketItem) {
+    const basket = this.GetCurrentValue();
+    const itemIndex = basket.basketItems.findIndex((i) => i.id === item.id);
+    if (basket.basketItems[itemIndex].quantity > 1) {
+      basket.basketItems[itemIndex].quantity--;
+      this.SetBasket(basket);
+    } else {
+      this.removeItemFormBasket(item);
+    }
+  }
+  removeItemFormBasket(item: IBasketItem) {
+    const basket = this.GetCurrentValue();
+    if (basket.basketItems.some((i) => i.id === item.id)) {
+      basket.basketItems = basket.basketItems.filter((i) => i.id !== item.id);
+      if (basket.basketItems.length > 0) {
+        this.SetBasket(basket);
+      } else {
+        this.DeleteBaskeItem(basket);
+      }
+    }
+  }
+  DeleteBaskeItem(basket: IBasket) {
+    return this.http
+      .delete(this.BaseURL + '/Baskets/delete-basket-item/' + basket.id)
+      .subscribe({
+        next: (value) => {
+          this.basketSource.next(null);
+          localStorage.removeItem('basketId');
+        },
+        error(err) {
+          console.log(err);
+        },
+      });
+  }
 }
+
 

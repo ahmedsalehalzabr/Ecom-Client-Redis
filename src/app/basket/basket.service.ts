@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { IProduct } from '../shared/Models/Product';
-import { Basket, IBasket, IBasketItem } from '../shared/Models/Basket';
+import { Basket, IBasket, IBasketItem, IBasketTotal } from '../shared/Models/Basket';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,18 @@ export class BasketService {
 
   private basketSource = new BehaviorSubject<IBasket>(null);
   basket$ = this.basketSource.asObservable();
-
+  private basketSourceTotal = new BehaviorSubject<IBasketTotal>(null);
+  basketTotal$ = this.basketSourceTotal.asObservable();
+  shipPrice: number = 0;
+  clacualteTotal() {
+    const basket = this.GetCurrentValue();
+    const shipping = 0;
+    const subtotal = basket.basketItems.reduce((a, c) => {
+      return (c.price * c.quantity) + a;
+    }, 0);
+    const total = shipping + subtotal;
+    this.basketSourceTotal.next({ shipping, subtotal, total });
+  }
   GetBasket(id: string) {
     return this.http.get(this.BaseURL + 'Baskets/get-basket-item/' + id).pipe(
       map((value: IBasket) => {
@@ -21,6 +32,7 @@ export class BasketService {
         if (value && value.id) {
           this.basketSource.next(value);
           console.log(value);
+          this.clacualteTotal()
           return value;
         } else {
           console.error('Failed to load basket or basket is empty');

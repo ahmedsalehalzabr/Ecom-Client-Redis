@@ -15,6 +15,9 @@ const routes: Routes = [
   {path:'checkout',loadChildren:()=> import('./checkout/checkout.module')
     .then(m=>m.CheckoutModule)
   },
+  {path:'Account',loadChildren:()=> import('./identity/identity.module')
+    .then(m=>m.IdentityModule)
+  },
   {path:'product-details/:id',component:ProductDetailsComponent},
 
   {path: '**',redirectTo:'',pathMatch:'full'}

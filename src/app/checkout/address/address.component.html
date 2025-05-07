@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-between mb-3">
+    <!-- زر حفظ التعديلات -->
+    <button class="btn btn-primary" [disabled]="!canEdit" (click)="UpdateAddress()">
+      Save Change Address
+    </button>
+  
+    <!-- زر تفعيل/تعطيل التعديل -->
+    <button class="btn" (click)="canEdit = !canEdit"
+      [ngClass]="{ 'btn-success': canEdit, 'btn-danger': !canEdit }">
+      {{ !canEdit ? 'Edit-disabled' : 'Edit-Enabled' }}
+    </button>
+  </div>
+  
+  <form [formGroup]="address" *ngIf="address">
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input type="text" id="firstName" class="form-control"
+             formControlName="firstName" [readonly]="!canEdit" required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input type="text" id="lastName" class="form-control"
+             formControlName="lastName" [readonly]="!canEdit" required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="street" class="form-label">Street</label>
+      <input type="text" id="street" class="form-control"
+             formControlName="street" [readonly]="!canEdit" required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="city" class="form-label">City</label>
+      <input type="text" id="city" class="form-control"
+             formControlName="city" [readonly]="!canEdit" required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="zipCode" class="form-label">ZIP Code</label>
+      <input type="text" id="zipCode" class="form-control"
+             formControlName="zipCode" [readonly]="!canEdit" required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="state" class="form-label">State</label>
+      <input type="text" id="state" class="form-control"
+             formControlName="state" [readonly]="!canEdit" required>
+    </div>
+  </form>
+  

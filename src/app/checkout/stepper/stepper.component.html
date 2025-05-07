@@ -1,0 +1,33 @@
+<div class="stepper">
+    <div class="steps">
+      <div [class.active]="currentStep === 1">1. Address</div>
+      <div [class.active]="currentStep === 2">2. Delivery</div>
+      <div [class.active]="currentStep === 3">3. Payment</div>
+    </div>
+  
+   <!-- Step 1 -->
+<div *ngIf="currentStep === 1">
+    <h3>Address</h3>
+    <app-address [address]="Address"></app-address>
+    <button type="button" class="btn btn-info" (click)="nextStep()" [disabled]="!Address.valid">Next</button>
+  </div>
+  
+  
+    <!-- Step 2 -->
+    <form *ngIf="currentStep === 2" [formGroup]="DeliveryMethod">
+      <h3>Delivery</h3>
+      <label><input type="radio" formControlName="delivery" value="standard" /> Standard</label>
+      <label><input type="radio" formControlName="delivery" value="express" /> Express</label>
+      <button type="button" (click)="prevStep()">Back</button>
+      <button type="button" (click)="nextStep()" [disabled]="!DeliveryMethod.valid">Next</button>
+    </form>
+  
+    <!-- Step 3 -->
+    <form *ngIf="currentStep === 3" [formGroup]="PaymentForm">
+      <h3>Payment</h3>
+      <input formControlName="nameOnCard" placeholder="Name on Card" />
+      <button type="button" (click)="prevStep()">Back</button>
+      <button type="button" (click)="submit()" [disabled]="!PaymentForm.valid">Submit</button>
+    </form>
+  </div>
+  
